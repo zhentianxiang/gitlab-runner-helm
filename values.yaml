@@ -409,19 +409,14 @@ runners:
   # runner configuration: https://docs.gitlab.com/runner/configuration/advanced-configuration.html
   config: |
     [[runners]]
+      output_limit = 512000
       #environment = ['DOCKER_AUTH_CONFIG={"auths": {"harbor.meta42.indc.vnet.com": {"auth": "emhlbnRpYW54aWFuZzpUaWFuMTgzMzI4MjUzMDku"}}}}']
       [runners.kubernetes]
         namespace = "{{ .Release.Namespace }}"
         image= "ubuntu:22.04"
-        #privileged = true
-        #cpu_limit = "1"
-        #memory_limit = "1Gi"
-        #service_cpu_limit = "1"
-        #service_memory_limit = "1Gi"
-        #helper_cpu_limit = "500m"
-        #helper_memory_limit = "100Mi"
-        #poll_interval = 5
-        #poll_timeout = 3600
+        privileged = true
+        cpu_limit = "3"
+        memory_limit = "5Gi"
         #dns_policy = "cluster-first"
         image_pull_secrets = ["harbor-registry-secret"]
       [runners.cache]
